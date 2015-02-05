@@ -58,7 +58,7 @@
       }
 
       xhr.onreadystatechange = function() {
-        if(xhr.status === 500 || xhr.status === 401 || xhr.status === 403 || xhr.status === 404) {
+        if(xhr.status === 500 || xhr.status === 401 || xhr.status === 403 || xhr.status === 404 || xhr.status === 400) {
           error_callback(xhr.status, xhr.statusText);
         } else {
           if (xhr.readyState === 4) {
@@ -182,7 +182,6 @@
   var _uriParam = function() {
       var result = {},
           params = window.location.search.split(/\?|\&/);
-
       params.forEach( function(it) {
           if (it) {
               var param = it.split("=");

@@ -45,30 +45,33 @@ module.exports = function(grunt) {
         }
       }
     },
+    jslint: {
+      all: ['src/*.js', 'src/**/*.js']
+    },
     jasmine : {
       // Your project's source files
-      src : 'src/**/*.js',
-      // Your Jasmine spec files
-      specs : 'specs/**/*.js'
+      src : [
+        'src/cts.js',
+        'src/modules/**.js',
+        'src/i18n/**.js',
+
+      ],
+      options : {
+        vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js'],
+        specs : 'specs/**/*.js'
+      }
     }
   });
 
   // Register tasks.
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-jslint');
 
   // Default task. 
   grunt.registerTask('default', ['concat', 'uglify']);
   grunt.registerTask('build', ['default']);
-  grunt.registerTask('test', ['default', 'jasmine']);
+  //grunt.registerTask('jshint', ['jshint']);
+  grunt.registerTask('test', ['jasmine']);
 };
